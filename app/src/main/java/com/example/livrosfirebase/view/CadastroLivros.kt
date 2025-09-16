@@ -167,7 +167,7 @@ fun CadastroLivros(navController: NavController){
                     Text(text = "Cadastrar Livros")
                 }
 
-                Spacer(modifier = Modifier.size(20.dp))
+                Spacer(modifier = Modifier.size(100.dp))
                 Text(text = mensagem)
             }
         }
