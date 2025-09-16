@@ -12,12 +12,14 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
@@ -37,6 +39,7 @@ import androidx.compose.runtime.simulateHotReload
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -126,6 +129,18 @@ fun CadastroLivros(navController: NavController){
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
+
+                Text(
+                    text = "Bem-vindo a nossa livraria!",
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontSize = MaterialTheme.typography.headlineLarge.fontSize,
+                    color = Color(0xFFA52A2A) // marrom
+                )
+
+                Spacer(modifier = Modifier.size(25.dp))
+
+
                 OutlinedTextField(
                     value = titulo,
                     onValueChange = { novotitulo ->
@@ -148,6 +163,7 @@ fun CadastroLivros(navController: NavController){
                     label = { Text(text = "Descrição do livro") }
                 )
 
+                Spacer(modifier = Modifier.size(20.dp))
                 Button(
                     onClick = {
                         if (titulo.isNotBlank() && genero.isNotBlank() && autor.isNotBlank()) {
@@ -162,12 +178,19 @@ fun CadastroLivros(navController: NavController){
                             genero = ""
                             autor = ""
                         }
-                    }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFFA52A2A) // marrom
+                    )
                 ) {
-                    Text(text = "Cadastrar Livros")
+                    Text(
+                        text = "Cadastrar Livros",
+                        color = Color.White // texto branco para contraste
+                    )
                 }
 
-                Spacer(modifier = Modifier.size(100.dp))
+
+                Spacer(modifier = Modifier.size(20.dp))
                 Text(text = mensagem)
             }
         }
