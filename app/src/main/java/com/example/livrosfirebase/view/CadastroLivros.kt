@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -41,6 +42,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.livrosfirebase.datasource.DataSource
@@ -61,6 +63,7 @@ fun CadastroLivros(navController: NavController){
     var scope = rememberCoroutineScope()
     //instanciando o banco de dados
     val dataSource = DataSource()
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
 
     var DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -98,31 +101,25 @@ fun CadastroLivros(navController: NavController){
                         IconButton(
                             onClick = {
                                 scope.launch {
-                                    DrawerState.apply {
-                                        if (isClosed) open() else close()
-                                    }
+                                    if (drawerState.isClosed) drawerState.open() else drawerState.close()
                                 }
                             }
                         ) {
-                            Icon(
-                                Icons.Default.Menu, contentDescription = "Icone do menu",
-                                tint = Color.White,
-                                modifier = Modifier.size(30.dp)
-                            )
+                            Icon(Icons.Default.Menu, contentDescription = "Ícone do menu", tint = Color.White)
                         }
                     }
                 )
             },
             bottomBar = {
-                BottomAppBar {
-                    //Text("rodapé")
-                }
-            },
-            floatingActionButton = {
+                BottomAppBar(
+                    containerColor =  Purple400,
+                ) {
+
+
                 FloatingActionButton(onClick = { navController.navigate(route = "ListaLivros") }) {
                     Icon(Icons.Default.Menu, contentDescription = "Adicionar")
                 }
-            }
+            }}
         ) { innerPadding ->
             Column(
                 modifier = Modifier.fillMaxSize().padding(innerPadding),
@@ -133,12 +130,21 @@ fun CadastroLivros(navController: NavController){
                 Text(
                     text = "Bem-vindo a nossa livraria!",
                     fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontSize = MaterialTheme.typography.headlineLarge.fontSize,
+                    fontSize = 28.sp,
                     color = Color(0xFFA52A2A) // marrom
                 )
 
-                Spacer(modifier = Modifier.size(25.dp))
+                Spacer(modifier = Modifier.size(40.dp))
+
+                Text(
+                    text = "Para realizar o cadastro dos livros:",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color(0xFFA52A2A) // marrom
+                )
+
+
+                Spacer(modifier = Modifier.size(10.dp))
 
 
                 OutlinedTextField(
@@ -180,7 +186,7 @@ fun CadastroLivros(navController: NavController){
                         }
                     },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFFA52A2A) // marrom
+                        containerColor =  Purple400, // marrom
                     )
                 ) {
                     Text(

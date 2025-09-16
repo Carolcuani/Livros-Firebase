@@ -79,12 +79,19 @@ fun ListaLivros(navController: NavController){
                     }
                 )
             },
-            bottomBar = { BottomAppBar { } },
-            floatingActionButton = {
+
+            //rodapé
+            bottomBar = {
+                BottomAppBar(
+                    containerColor =  Purple400,
+                ) {
+
                 FloatingActionButton(onClick = { navController.navigate("CadastroLivros") }) {
                     Icon(Icons.Default.Add, contentDescription = "Adicionar")
                 }
+                }
             }
+
         ) { innerPadding ->
 
             Column(modifier = Modifier.fillMaxSize().padding(innerPadding)) {
